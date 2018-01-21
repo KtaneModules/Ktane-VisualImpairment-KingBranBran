@@ -122,7 +122,7 @@ public class VisualImpairment : MonoBehaviour
         if (roundsFinished == stageCount)
         {
             DebugLog("Module passed.");
-            Audio.PlaySoundAtTransform("modulepass", impairment.transform);
+            Audio.PlaySoundAtTransform("modulepass", buttons[12].transform);
             foreach (KMSelectable button in buttons)
             {
                 button.gameObject.GetComponent<Renderer>().material = materials[7];
@@ -134,7 +134,7 @@ public class VisualImpairment : MonoBehaviour
         }
         else
         {
-            Audio.PlaySoundAtTransform("stagepass", impairment.transform);
+            Audio.PlaySoundAtTransform("stagepass", buttons[12].transform);
             DebugLog("Start of stage #{0}.", roundsFinished + 1);
             StartCoroutine(DelayThenReset());
         }
