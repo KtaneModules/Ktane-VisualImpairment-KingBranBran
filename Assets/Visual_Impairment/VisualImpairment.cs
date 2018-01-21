@@ -39,9 +39,7 @@ public class VisualImpairment : MonoBehaviour
         _moduleId = _moduleIdCounter++;
         stageCount = Random.Range(1, 4);
         pictureNum = Random.Range(0, 8);
-        pictureNum = 8;
         orientation = Random.Range(1, 9);
-        orientation = 1;
         color = Random.Range(0, 4);
         PickPicture();
         impairment.OnActivate += Activate;

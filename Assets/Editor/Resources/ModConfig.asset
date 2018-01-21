@@ -21,7 +21,7 @@ MonoBehaviour:
 
     HTML: https://ktane.timwi.de/HTML/Visual%20Impairment.html
 
-    PDF: '
+    PDF: https://ktane.timwi.de/PDF/Visual%20Impairment.pdf'
   version: 1
   outputFolder: C:\Users\kingb\OneDrive\Documents\KTANE Mods
   previewImage: {fileID: 2800000, guid: fca8183d2ef137941aaeac6f54a5beea, type: 3}
