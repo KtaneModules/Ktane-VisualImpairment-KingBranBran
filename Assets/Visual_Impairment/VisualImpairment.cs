@@ -122,6 +122,7 @@ public class VisualImpairment : MonoBehaviour
         if (roundsFinished == stageCount)
         {
             DebugLog("Module passed.");
+            Audio.PlaySoundAtTransform("modulepass", impairment.transform);
             foreach (KMSelectable button in buttons)
             {
                 button.gameObject.GetComponent<Renderer>().material = materials[7];
@@ -133,6 +134,7 @@ public class VisualImpairment : MonoBehaviour
         }
         else
         {
+            Audio.PlaySoundAtTransform("stagepass", impairment.transform);
             DebugLog("Start of stage #{0}.", roundsFinished + 1);
             StartCoroutine(DelayThenReset());
         }
@@ -141,6 +143,7 @@ public class VisualImpairment : MonoBehaviour
     private void ResetModule()
     {
         color = Random.Range(0, 4);
+
         indicator.GetComponent<Renderer>().material = materials[color];
 
         DebugLog("Color to press: {0}", new[] { "Blue", "Green", "Red", "White" }[color]);
@@ -177,7 +180,7 @@ public class VisualImpairment : MonoBehaviour
 
     void PickPicture()
     {
-        orientation = 6;// Random.Range(1, 9);
+        orientation = Random.Range(1, 9);
         pictureNum = Random.Range(0, 8);
         switch (pictureNum)
         {
