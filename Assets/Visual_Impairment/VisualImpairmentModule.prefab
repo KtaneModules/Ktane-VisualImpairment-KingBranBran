@@ -4665,10 +4665,10 @@ MonoBehaviour:
   Audio: {fileID: 114872147159315682}
   indicator: {fileID: 1383641788675932}
   colorList:
-  - W
   - B
   - G
   - R
+  - W
   materials:
   - {fileID: 2100000, guid: 2338a166a51dcd44dadb6ddb3e7abc79, type: 2}
   - {fileID: 2100000, guid: eb0a72e44262e114aa4b753e0dfb33e8, type: 2}
