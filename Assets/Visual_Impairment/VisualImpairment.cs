@@ -181,7 +181,7 @@ public class VisualImpairment : MonoBehaviour
     void PickPicture()
     {
         orientation = Random.Range(1, 9);
-        pictureNum = Random.Range(0, 8);
+        pictureNum = Random.Range(0, 9);
         switch (pictureNum)
         {
             case 0:
