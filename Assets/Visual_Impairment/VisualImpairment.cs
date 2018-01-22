@@ -35,7 +35,7 @@ public class VisualImpairment : MonoBehaviour
     void Start()
     {
         _moduleId = _moduleIdCounter++;
-        stageCount = Random.Range(2, 5);
+        stageCount = Random.Range(2, 4);
 
         DebugLog("This module will have {0} stages.", stageCount);
         DebugLog("Start of stage #1.");
