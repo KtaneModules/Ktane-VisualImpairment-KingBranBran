@@ -13,6 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: visual_impairment
   title: Visual Impairment
+  author: 
   description: 'Press all the indicated buttons on the module without seeing them
     correctly.
 
@@ -26,5 +27,5 @@ MonoBehaviour:
 
     Module ID for mission makers: visual_impairment'
   version: 1
-  outputFolder: C:\Users\kingb\OneDrive\Documents\KTANE Mods
+  outputFolder: build
   previewImage: {fileID: 2800000, guid: fca8183d2ef137941aaeac6f54a5beea, type: 3}
