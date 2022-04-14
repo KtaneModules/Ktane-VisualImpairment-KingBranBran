@@ -26,6 +26,7 @@ public class VisualImpairment : MonoBehaviour
     private int Green;
     private int Red;
     private bool anyPressed;
+    private bool unpressable = true;
     private HashSet<int> buttonsLeftToPress;
     private int roundsFinished = 0;
     private bool moduleSolved = false;
@@ -52,13 +53,14 @@ public class VisualImpairment : MonoBehaviour
         return delegate
         {
             Audio.PlaySoundAtTransform("tick", buttons[rotated].transform);
-            if (moduleSolved)
+            if (moduleSolved || unpressable)
                 return false;
 
             var i = unrotate(rotated);
-            DebugLog("You pressed {0}{1}, which is {2}{3} in the original picture.", (char)('A' + rotated % 5), (char)('1' + rotated / 5), (char)('A' + i % 5), (char)('1' + i / 5));
             if (picture[i] == colorList[color])
             {
+                if (buttonsLeftToPress.Contains(i))
+                    DebugLog("You pressed {0}{1}, which is {2}{3} in the original picture.", (char)('A' + rotated % 5), (char)('1' + rotated / 5), (char)('A' + i % 5), (char)('1' + i / 5));
                 buttonsLeftToPress.Remove(i);
                 if (!anyPressed)
                 {
@@ -71,6 +73,7 @@ public class VisualImpairment : MonoBehaviour
             }
             else
             {
+                DebugLog("You pressed {0}{1}, which is {2}{3} in the original picture.", (char)('A' + rotated % 5), (char)('1' + rotated / 5), (char)('A' + i % 5), (char)('1' + i / 5));
                 DebugLog("Button was incorrect.");
                 impairment.HandleStrike();
                 StartCoroutine(DelayThenReset());
@@ -160,6 +163,7 @@ public class VisualImpairment : MonoBehaviour
         PickPicture();
 
         DebugLog("Buttons to press: {0}", string.Join(", ", buttonsLeftToPress.Select(ix => rotate(ix)).Select(ix => "" + (char)('A' + ix % 5) + (char)('1' + ix / 5)).OrderBy(str => str).ToArray()));
+        unpressable = false;
     }
 
     private int PickRandomFrom(List<int> list)
@@ -310,6 +314,7 @@ public class VisualImpairment : MonoBehaviour
 
     IEnumerator DelayThenReset()
     {
+        unpressable = true;
         indicator.gameObject.GetComponent<Renderer>().material = materials[4];
         foreach (KMSelectable button in buttons)
             button.gameObject.GetComponent<Renderer>().material = materials[7];
@@ -340,6 +345,21 @@ public class VisualImpairment : MonoBehaviour
                 var x = parts[i][0] - 'a';
                 var y = parts[i][1] - '1';
                 buttons[y * 5 + x].OnInteract();
+                yield return new WaitForSeconds(.1f);
+            }
+        }
+    }
+
+    IEnumerator TwitchHandleForcedSolve()
+    {
+        int start = roundsFinished;
+        for (int i = start; i < stageCount; i++)
+        {
+            while (unpressable) yield return true;
+            int end = buttonsLeftToPress.Count;
+            for (int j = 0; j < end; j++)
+            {
+                buttons[rotate(buttonsLeftToPress.ElementAt(0))].OnInteract();
                 yield return new WaitForSeconds(.1f);
             }
         }
